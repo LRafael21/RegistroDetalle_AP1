@@ -2,149 +2,183 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System;
-using Blazor.DAL;
-using Blazor.Entidades;
+using BLAZORREGISTRO.DAL;
+using BLAZORREGISTRO.Entidades;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Http.Headers;
 
-namespace Blazor.BLL
+namespace BLAZORREGISTRO.BLL
 {
     public class ProductosBLL
     {
-        private static bool Existe(int ID)
+        public static bool Existe(int productoId)
         {
-            bool está = false;
             Contexto contexto = new Contexto();
+            bool encontrado = false;
 
             try
             {
-                está=contexto.Productos.Any(e=> e.ProductoId== ID);
-            }catch (Exception)
+                encontrado = contexto.Productos.Any(e => e.ProductoId == productoId);
+            }
+            catch (System.Exception)
             {
+
                 throw;
-            }finally
+            }
+            finally
             {
                 contexto.Dispose();
             }
+            return encontrado;
 
-            return está;
         }
-        public static bool Existe(string descrip)
+        public static bool Existe(string descripcion)
         {
-            bool está = false;
             Contexto contexto = new Contexto();
+            bool encontrado = false;
 
             try
             {
-                está=contexto.Productos.Any(e=> e.Descripcion==descrip);
-            }catch (Exception)
+                encontrado = contexto.Productos.Any(e => e.Descripcion == descripcion);
+            }
+            catch (System.Exception)
             {
+
                 throw;
-            }finally
+            }
+            finally
             {
                 contexto.Dispose();
             }
+            return encontrado;
 
-            return está;
         }
-        public static bool Insertar(Productos producto)
-        {
-            Contexto contexto = new Contexto();
-            bool esta = false;
-
-            try
-            {
-                contexto.Productos.Add(producto);
-                esta = contexto.SaveChanges()>0;
-            }catch(Exception)
-            {
-                throw;
-            }finally
-            {
-                contexto.Dispose();
-            }
-
-            return esta;
-        }
-        private static bool Modificar(Productos producto)
-        {
-            bool esta = false;
-            Contexto contexto = new Contexto();
-
-            try
-            {
-                contexto.Entry(producto).State = EntityState.Modified;
-                esta = contexto.SaveChanges()>0;
-            }catch(Exception)
-            {
-                throw;
-            }finally{
-                contexto.Dispose();
-            }
-
-            return esta;
-        }
-        public static bool Guardar(Productos producto)
-        {
-            if(Existe(producto.ProductoId))
-                return Modificar(producto);
-            else
-                return Insertar(producto);
-        }
-        public static Productos Buscar(int ID)
-        {
-            Contexto contexto = new Contexto();
-            Productos producto;
-
-            try
-            {
-                producto = contexto.Productos.Find(ID);
-            }catch(Exception)
-            {
-                throw;
-            }finally{
-                contexto.Dispose();
-            }
-            return producto;
-        }
-        public static bool Eliminar(int id)
+        private static bool Insertar(Productos productos)
         {
             Contexto contexto = new Contexto();
             bool paso = false;
 
             try
             {
-                var producto = contexto.Productos.Find(id);
-                if(producto !=null)
-                {
-                    contexto.Productos.Remove(producto);
-                    paso=contexto.SaveChanges()>0;
-                }
+                contexto.Productos.Add(productos);
+                paso = contexto.SaveChanges() > 0;
             }
-            catch(Exception)
+            catch (System.Exception)
             {
+
                 throw;
             }
-            finally{
+            finally
+            {
                 contexto.Dispose();
             }
             return paso;
+
         }
-        public static List<Productos> GetList()
+        private static bool Modificar(Productos productos)
         {
-            List<Productos> lista = new List<Productos>();
             Contexto contexto = new Contexto();
+            bool paso = false;
             try
             {
-                lista = contexto.Productos.ToList();
-            }catch(Exception)
+                contexto.Entry(productos).State = EntityState.Modified;
+                paso = contexto.SaveChanges() > 0;
+            }
+            catch (System.Exception)
             {
+
                 throw;
             }
-            finally{
+            finally
+            {
+                contexto.Dispose();
+            }
+            return paso;
+
+
+        }
+
+        public static bool Guardar(Productos productos)
+        {
+            if (!Existe(productos.ProductoId))
+                return Insertar(productos);
+            else
+                return Modificar(productos);
+        }
+
+        public static bool Eliminar(int productoId)
+        {
+
+            Contexto contexto = new Contexto();
+            bool paso = false;
+            try
+            {
+                var librodeProductos = contexto.Productos.Find(productoId);
+                if (librodeProductos != null)
+                {
+                    contexto.Productos.Remove(librodeProductos);
+                    paso = contexto.SaveChanges() > 0;
+                }
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                contexto.Dispose();
+            }
+            return paso;
+
+        }
+
+        public static Productos? Buscar(int productoId)
+        {
+
+
+            Contexto contexto = new Contexto();
+            Productos? producto;
+            try
+            {
+                producto = contexto.Productos.Find(productoId);
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                contexto.Dispose();
+            }
+            return producto;
+
+
+
+
+        }
+        public static List<Productos> GetList(Expression<Func<Productos, bool>> criterio)
+        {
+
+
+            Contexto contexto = new Contexto();
+            List<Productos> lista = new List<Productos>();
+            try
+            {
+                lista = contexto.Productos.Where(criterio).ToList();
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
                 contexto.Dispose();
             }
             return lista;
+
         }
     }
 }

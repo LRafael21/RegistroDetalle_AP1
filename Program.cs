@@ -1,14 +1,22 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Blazor.Data;
+using BLAZORREGISTRO.DAL;
+using Microsoft.EntityFrameworkCore;
+using Blazored.Toast;
+using Blazored.Toast.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-//builder.Services.AddBlazoredToast();
+builder.Services.AddBlazoredToast();
 builder.Services.AddSingleton<WeatherForecastService>();
+
+/*builder.Services.AddDbContext<Contexto>(options =>
+            options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))
+    );*/
 
 var app = builder.Build();
 

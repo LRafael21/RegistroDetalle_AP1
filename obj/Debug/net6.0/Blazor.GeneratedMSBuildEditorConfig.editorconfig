@@ -8,53 +8,53 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Blazor
 build_property.RootNamespace = Blazor
-build_property.ProjectDir = D:\BlazorPrueba\Blazor\
+build_property.ProjectDir = D:\BlazorPrueba\BlazorRegistro\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\BlazorPrueba\Blazor
+build_property.MSBuildProjectDirectory = D:\BlazorPrueba\BlazorRegistro
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/BlazorPrueba/Blazor/App.razor]
+[D:/BlazorPrueba/BlazorRegistro/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BlazorPrueba/Blazor/Pages/Counter.razor]
+[D:/BlazorPrueba/BlazorRegistro/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BlazorPrueba/Blazor/Pages/FetchData.razor]
+[D:/BlazorPrueba/BlazorRegistro/Pages/FetchData.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BlazorPrueba/Blazor/Pages/Index.razor]
+[D:/BlazorPrueba/BlazorRegistro/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BlazorPrueba/Blazor/Shared/SurveyPrompt.razor]
+[D:/BlazorPrueba/BlazorRegistro/Shared/SurveyPrompt.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BlazorPrueba/Blazor/_Imports.razor]
+[D:/BlazorPrueba/BlazorRegistro/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BlazorPrueba/Blazor/Shared/MainLayout.razor]
+[D:/BlazorPrueba/BlazorRegistro/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-r0yqwuvdyg
 
-[D:/BlazorPrueba/Blazor/Shared/NavMenu.razor]
+[D:/BlazorPrueba/BlazorRegistro/Shared/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-6hj6azdo60
 
-[D:/BlazorPrueba/Blazor/Pages/Error.cshtml]
+[D:/BlazorPrueba/BlazorRegistro/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BlazorPrueba/Blazor/Pages/_Host.cshtml]
+[D:/BlazorPrueba/BlazorRegistro/Pages/_Host.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BlazorPrueba/Blazor/Pages/_Layout.cshtml]
+[D:/BlazorPrueba/BlazorRegistro/Pages/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

@@ -1,6 +1,10 @@
 ﻿@page "/counter"
 @page "/Productos"
 @page "/Productos/{ProductoId:int}"
+@using BLAZORREGISTRO.BLL
+@using BLAZORREGISTRO.Entidades
+
+@inject IToastService toast
 
 <PageTitle>Registro de Productos</PageTitle>
 
@@ -31,23 +35,24 @@
                     </div>
                 </div>
 
-                @* <div class="form-group">
-                    <label> Producto Id </label>
-                    <InputNumber class="form-control" @bind-Value="productos.ProductoId" />
-                    </div> *@
-
+               
+             <div class="row">
                 @* Descripcion *@
                 <div class="form-group">
                     <label> Descripcion </label>
                     <InputText class="form-control" @bind-Value="productos.Descripcion" />
                     <ValidationMessage For="@(() => productos.Descripcion)" />
                 </div>
+             </div>
 
+                 <div class="row">
                 @* Existencia *@
                 <div class="form-group">
                     <label> Existencia </label>
                     <InputNumber class="form-control" @bind-Value="productos.Existencia" />
                     <ValidationMessage For="@(() => productos.Existencia)" />
+
+                
 
                     @* Costo *@
                     <div class="form-group">
@@ -57,28 +62,111 @@
                     </div>
 
                     @* ValorInventario *@
+
+                    <div class="form-group">
+                        <label>ValorInventario</label>
+                        <InputNumber readonly class="form-control" @bind-Value="productos.ValorInventario" />
+                        <ValidationMessage For="@(() => productos.ValorInventario)" />
+                    </div>
+                 </div>
+
+                <div class="row">
+                    @* Precio *@
+                    <div class="form-group">
+                        <label>Precio</label>
+                        <InputNumber class="form-control" @bind-Value="productos.Precio" />
+                        <ValidationMessage For="@(() => productos.Precio)" />
+                    </div>
+                    </div>
+
+                    @* Ganancia *@
                     <div>
                         <div class="form-group">
-                            <label>ValorInventario</label>
-                            <InputNumber readonly class="form-control" @bind-Value="productos.ValorInventario" />
-                            <ValidationMessage For="@(() => productos.ValorInventario)" />
+                            <label>Ganancia</label>
+                            <InputNumber class="form-control" @bind-Value="productos.Ganancia" />
+                            <ValidationMessage For="@(() => productos.Ganancia)" />
                         </div>
-
+                 </div>
 
                     </div>
                     <div class="card-footer">
 
 
                         <div class="form-group text-center" display: inline-block>
-                            <button type="button" class="btn btn-lg btn-primary"> Nuevo</button>
+                            <button type="button" class="btn btn-lg btn-primary" @onclick="Nuevo"> Nuevo</button>
                             <button type="submit" class="btn btn-lg btn-success">Guardar</button>
                             <button type="button" class="btn btn-lg btn-danger" @onclick="Eliminar">Eliminar</button>
                         </div>
                     </div>
                 </div>
+                 <br>
+
+        <div class="card">
+
+            <div class="card-header">
+                <h3>Detalle</h3>
+            </div>
+
+            <div class="card-body">
+
+                <form>
+                    <div class="input-group d-flex align-items-end">
+
+                        <div class="row">
+
+                            @* Costo *@
+                            <div class="form-group col">
+                                <label>Presentacion</label>
+                                <InputText class="form-control" @bind-Value="detalle.Descripcion" />
+                            </div>
+
+                            @* Ganacias *@
+                            <div class="form-group col">
+                                <label>Cantidad</label>
+                                <InputNumber class="form-control" @bind-Value="detalle.Cantidad" />
+                            </div>
+
+                            @* Precio *@
+                            <div class="form-group col">
+                                <label>Precio</label>
+                                <InputNumber class="form-control" @bind-Value="detalle.Precio" />
+                            </div>
+
+                        </div>
+
+                        <button type="button" class="btn btn-success" >
+                            ➕ Agregar Detalle
+                        </button>
+
+                    </div>
+                    <br>
+                    <table class="table table-secondary">
+                        <thead class="thead-dark">
+                            <tr class="table-info">
+                                <th>Id</th>
+                                <th>Presentacion</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <th>1</th>
+                            <th>Lorem ipsum dolor</th>
+                            <th>40</th>
+                            <th>$ 500</th>
+
+                        </tbody>
+                    </table>
+                </form>
+
+            </div>
+             </div>
             </div>
         </div>
-    </div>
+
+        
+    
 </EditForm>
 
 
@@ -90,51 +178,96 @@
     public int ProductoId { get; set; }
     public Productos productos { get; set; } = new Productos();
 
+    public ProductosDetalle detalle { get; set; } = new ProductosDetalle();
+
 
 
     protected override void OnInitialized()
     {
+        Nuevo();
+
         Buscar();
     }
 
-
+    public void Nuevo()
+    {
+        productos = new Productos();
+    }
 
 
 
     private void Buscar()
     {
-        if (this.ProductoId > 0)
+        if (productos.ProductoId > 0)
         {
-            var encontrado = ProductosBLL.Buscar(this.ProductoId);
-
+            var encontrado = ProductosBLL.Buscar(productos.ProductoId);
+            Nuevo();
             if (encontrado != null)
                 this.productos = encontrado;
-            //Mostrar un Toast (De que no se encontro)
+            else
+            {
+                toast.ShowWarning("No encontrado");
+                //Mostrar un Toast (De que no se encontro)
+            }
         }
-
-
     }
+
+
     public void Guardar()
     {
-        ProductosBLL.Guardar(productos);
+
+
+        var guardo = ProductosBLL.Guardar(productos);
+
+        if (guardo)
+        {   
+            CalcularValorInventario();
+            toast.ShowSuccess("Guardado correctamente");
+             Nuevo();
+        }
+        else
+        {
+            toast.ShowError("No fue posible guardar");
+        }
     }
+    private void CalcularValorInventario()
+    {
+        decimal costo = productos.Costo;
+        decimal existencia = productos.Existencia;
+
+        productos.ValorInventario = costo * existencia;
+    }
+
+    private void CalcularGanancia()
+    {
+
+    }
+
+
+    /*public void Guardar()
+    {
+    var detalle = new ProductosDetalle(){
+    Descripcion = "6 Pack",
+    Cantidad = 6,
+    Precio = 500
+    };
+
+    productos.ProductosDetalle.add( detalle);
+
+    }*/
 
     private void Eliminar()
     {
-        bool eliminado;
-        eliminado = ProductosBLL.Eliminar(productos.ProductoId);
-        if(eliminado)
+        bool elimino;
+        elimino = ProductosBLL.Eliminar(productos.ProductoId);
+        if (elimino)
         {
-            //Llamar el metodo nuevo
-            //Mostrar Toast Diciendo que se elimino
-        }else
+            Nuevo();
+            toast.ShowSuccess("Eliminado correctamente");
+        }
+        else
         {
-           // mostrar toast de que no fue posible eliminar
+            toast.ShowError("No fue posible eliminar");
         }
     }
-
-    
-
-
-
 }

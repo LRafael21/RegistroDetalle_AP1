@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aEEJmSXyXwnG97CuQSRqX1z9EIo3EEd+G9aVhKnZa1ctIEsVs961vOEpEJfO+JUbwOuA/DQhaPbZwvqbAtKMLQ==",
+  "dgSpecHash": "iURLknwVA5MGYBE0suW2PRZZRn/whchgskVdgw7Kx2XxJS6pjPvF0nPAO1QJDzovEFZESImiGVb3+Uh6r9zVpQ==",
   "success": true,
-  "projectFilePath": "D:\\BlazorPrueba\\Blazor\\Blazor.csproj",
+  "projectFilePath": "D:\\BlazorPrueba\\BlazorRegistro\\Blazor.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Luis Rafael\\.nuget\\packages\\blazored.toast\\3.2.2\\blazored.toast.3.2.2.nupkg.sha512",
     "C:\\Users\\Luis Rafael\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

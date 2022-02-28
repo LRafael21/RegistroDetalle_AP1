@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace Blazor.Entidades
+namespace BLAZORREGISTRO.Entidades
 {
     public partial class Productos
     {
@@ -18,5 +19,15 @@ namespace Blazor.Entidades
         [Range(1,int.MaxValue, ErrorMessage ="El costo debe estar dentro del rango permitido")]
         public decimal Costo { get; set; }
         public decimal ValorInventario { get; set; }
+
+        [Required(ErrorMessage = "Es obligatorio introducir el Precio")]
+        public decimal Precio { get; set; }
+
+        [Required(ErrorMessage = "Es obligatorio introducir la Ganancia")]
+        public decimal Ganancia{ get; set; }
+
+        [ForeignKey("ProductoId")]
+
+        public List<ProductosDetalle> Detalle { get; set; } = new List<ProductosDetalle>();
     }
 }
