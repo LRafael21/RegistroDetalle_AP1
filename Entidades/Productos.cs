@@ -26,8 +26,8 @@ namespace BLAZORREGISTRO.Entidades
         [Required(ErrorMessage = "Es obligatorio introducir la Ganancia")]
         public decimal Ganancia{ get; set; }
 
-        [ForeignKey("ProductoId")]
+      //  [ForeignKey("ProductoId")]
 
-        public List<ProductosDetalle> Detalle { get; set; } = new List<ProductosDetalle>();
+       // public List<ProductosDetalle> Detalle { get; set; } = new List<ProductosDetalle>();
     }
 }

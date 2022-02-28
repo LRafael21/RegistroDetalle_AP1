@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+/*sing System.ComponentModel.DataAnnotations;
 
 namespace BLAZORREGISTRO.Entidades
 {
@@ -31,4 +31,4 @@ namespace BLAZORREGISTRO.Entidades
             this.Precio = precio;
         }
     }
-}
+}*/
